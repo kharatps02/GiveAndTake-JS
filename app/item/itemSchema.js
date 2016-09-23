@@ -33,7 +33,7 @@ var item = (function () {
             type: String
         },
         photo_url: {
-            type: String
+            type: Array
         },
         location_to_pickup: {
             type: String
@@ -42,6 +42,9 @@ var item = (function () {
             type: String,
             enum: ["New", "Fair", "Good", "Poor"],
             default: "Good"
+        },
+        status: {
+            type: String
         },
         userId: {
             type: String
