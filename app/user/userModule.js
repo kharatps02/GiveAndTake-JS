@@ -105,10 +105,50 @@ var userModule = (function () {
         });
 
     }
+
+    function registerDevice(req, res) {
+        var userId = req.body.userId;
+        var deviceToken = req.body.token;
+        var jsonObj = {};
+        User.findOne({
+            _id: userId
+        }, function (err, user) {
+            if (!err) {
+                if (user.tokens === undefined) {
+                    user.tokens = [deviceToken];
+                } else {
+                    user.tokens.push(deviceToken);
+                }
+
+                user.save(function (error, user1) {
+                    if (!error) {
+                        jsonObj = {
+                            status: 'SUCCESS',
+                            cafeList: user1
+                        }
+                    } else {
+                        jsonObj = {
+                            status: 'ERROR',
+                            message: 'Internal Server error'
+                        }
+                    }
+                    res.send(jsonObj);
+                });
+            } else {
+                jsonObj = {
+                    status: 'ERROR',
+                    message: 'Internal Server error'
+                }
+                res.send(jsonObj);
+            }
+        });
+    };
+
     return {
         signIn: signIn,
         signUp: signUp,
-        getUsers: getUsers
+        getUsers: getUsers,
+        registerDevice: registerDevice
     };
 })();
 

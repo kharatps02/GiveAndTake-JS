@@ -7,6 +7,7 @@ var userModule = require('../app/user/userModule');
 router.post('/users/signin', userModule.signIn);
 router.post('/users/signup', userModule.signUp);
 router.get('/users', userModule.getUsers);
+router.post('/users/registerDevice', userModule.registerDevice);
 
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });

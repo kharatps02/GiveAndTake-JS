@@ -34,13 +34,16 @@ var User = (function () {
             type: String
         },
         address: {
-            type: String         
+            type: String
         },
         city: {
             type: String
         },
         state: {
             type: String
+        },
+        tokens: {
+            type: Array
         },
         created_at: {
             type: Date,
