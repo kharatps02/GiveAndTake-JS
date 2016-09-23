@@ -84,17 +84,16 @@ var userModule = (function () {
         });
     };
 
-    function getList(req, res) {
+    function getUsers(req, res) {
 
         var jsonObj = {};
-        var reqBody = req.body;
-        Cafe.find({
-            user_ref_id: reqBody.userId
+
+        User.find({
         }, function (error, result) {
             if (!error) {
                 jsonObj = {
                     status: 'SUCCESS',
-                    cafeList: result
+                    users: result
                 }
             } else {
                 jsonObj = {
@@ -108,7 +107,8 @@ var userModule = (function () {
     }
     return {
         signIn: signIn,
-        signUp: signUp
+        signUp: signUp,
+        getUsers: getUsers
     };
 })();
 
