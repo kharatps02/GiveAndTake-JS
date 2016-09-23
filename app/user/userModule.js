@@ -45,7 +45,9 @@ var userModule = (function () {
             address: reqBody.address || '',
             city: reqBody.city || '',
             state: reqBody.state || '',
-            mobile: reqBody.mobile || ''
+            mobile: reqBody.mobile || '',
+            lat: reqBody.lat || '',
+            lng: reqBody.lng || ''
         });
 
         var jsonObj = {};

@@ -4,6 +4,7 @@ var User = (function () {
     var Schema = mongoose.Schema;
 
     var locationSchema = new Schema({
+
         address: {
             type: String,
             required: true
@@ -30,16 +31,28 @@ var User = (function () {
             type: String,
             required: true
         },
+        profile_img:{
+            type:String
+        },
         mobile: {
             type: String
         },
         address: {
             type: String
         },
+        location: {
+            type: Object
+        },
         city: {
             type: String
         },
         state: {
+            type: String
+        },
+        lat: {
+            type: String
+        },
+        lng: {
             type: String
         },
         tokens: {
