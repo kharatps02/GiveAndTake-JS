@@ -1,4 +1,5 @@
 var User = require('./userSchema').User;
+var mailService = require('./../mail-server');
 var userModule = (function () {
     function signIn(req, res) {
         console.log(req.body)
@@ -19,6 +20,7 @@ var userModule = (function () {
                         message: 'User logged Successfully.',
                         user: user
                     }
+
                 } else {
                     jsonObj = {
                         status: 'ERROR',
@@ -59,15 +61,15 @@ var userModule = (function () {
             if (!user) {
 
                 UserObj.save(function (error, user1) {
-                    console.log(error);
-                    console.log(user1);
-
                     if (!error) {
                         jsonObj = {
                             status: 'SUCCESS',
                             message: 'User register Successfully.',
                             user: user1
                         }
+                        mailService.sendMail(reqBody.email, 'Welcome to BartHub!', 'Welcome ' + reqBody.email + '!', function () {
+                            console.log('Email sent on ' + reqBody.email);
+                        });
                     } else {
                         jsonObj = {
                             status: 'ERROR',
