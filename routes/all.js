@@ -5,9 +5,10 @@ var userModule = require('../app/user/userModule');
 var itemModule = require('../app/item/itemModule');
 
 /* users listing. */
+router.get('/users', userModule.getUsers);
 router.post('/users/signin', userModule.signIn);
 router.post('/users/signup', userModule.signUp);
-router.get('/users', userModule.getUsers);
+
 router.post('/users/registerDevice', userModule.registerDevice);
 
 /* prdocut listing. */

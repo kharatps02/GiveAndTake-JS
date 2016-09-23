@@ -8,7 +8,7 @@ var item = (function () {
             enum: ["Give", "Take", "Donate"],
             default: "Give"
         },
-        request_title: {
+        title: {
             type: String
         },
         category: {
@@ -17,7 +17,10 @@ var item = (function () {
         requester: {
             type: String
         },
-        item_value: {
+        min_value: {
+            type: String
+        },
+        max_value: {
             type: String
         },
         points: {

@@ -4,7 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var multer  = require('multer')
+var upload = multer({ dest: __dirname+'/temp/uploads/' })
 var routes = require('./routes/all');
 
 var db = require('./config/db');
@@ -29,8 +30,14 @@ var allowCrossDomain = function (req, res, next) {
   next();
 }
 app.use(allowCrossDomain);
-app.use('/', routes);
+app.use('/', routes); 
+//upload.array('photos', 12),
+// app.post('/upload',  function (req, res, next) {
 
+//   console.log(req.body.files);
+//   // req.files is array of `photos` files
+//   // req.body will contain the text fields, if there were any
+// });
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   // var err = new Error('Not Found');

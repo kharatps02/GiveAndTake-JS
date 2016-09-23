@@ -47,7 +47,8 @@ var userModule = (function () {
             state: reqBody.state || '',
             mobile: reqBody.mobile || '',
             lat: reqBody.lat || '',
-            lng: reqBody.lng || ''
+            lng: reqBody.lng || '',
+            profile_img: reqBody.profile_img || ''
         });
 
         var jsonObj = {};

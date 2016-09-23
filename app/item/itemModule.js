@@ -7,7 +7,7 @@ var itemModule = (function () {
 
         var itemObj = new Item({
             request_type: reqBody.request_type || 'Give',
-            request_title: reqBody.request_title || '',
+            title: reqBody.title || '',
             category: reqBody.category || '',
             requester: reqBody.requester,
             item_value: reqBody.item_value || '',
