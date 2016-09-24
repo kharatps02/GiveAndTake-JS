@@ -83,7 +83,7 @@ var itemModule = (function () {
 
         var obj = {};
         var conditions = {}, conditions1 = {}, conditions2 = {};
-        var andCond = [], orCond = [];
+        var andCond = [], orCond = [], orCond1 = [];
 
         if (reqBody.min_value !== undefined) {
             obj['min_value'] = reqBody.min_value;
@@ -118,14 +118,17 @@ var itemModule = (function () {
 
         if (reqBody.min_value !== undefined && reqBody.max_value !== undefined) {
             conditions1['$and'] = andCond;
-
+            orCond1.push(conditions1);
         } else {
             conditions1 = conditions;
         }
 
         if (reqBody.take_title !== undefined) {
+            orCond1.push({ title: reqBody.take_title });
+            orCond1.push({ description: reqBody.take_title });
+
             conditions2 = {
-                "$or": [{ title: reqBody.take_title }, { description: reqBody.take_title }, conditions1]
+                "$or": orCond1
             }
         } else {
             conditions2 = conditions1;
