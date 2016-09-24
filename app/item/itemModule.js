@@ -82,38 +82,53 @@ var itemModule = (function () {
         var reqBody = req.body;
 
         var obj = {};
-        var conditions = {};
+        var conditions = {}, conditions1 = {}, conditions2 = {};
+        var andCond = [], orCond = [];
+
         if (reqBody.min_value !== undefined) {
             obj['min_value'] = reqBody.min_value;
             conditions["min_value"] = {
                 '$gte': obj.min_value
             }
+            andCond.push({
+                "min_value": {
+                    '$gte': obj.min_value
+                }
+            });
         }
+
         if (reqBody.max_value !== undefined) {
             obj['max_value'] = reqBody.max_value;
             conditions["max_value"] = {
                 '$lte': obj.max_value
             }
-        }
-        var conditions1 = {};
-        if (reqBody.min_value !== undefined && reqBody.max_value !== undefined) {
-            conditions["min_value"] = {
-                '$gte': obj.min_value
-            }
-            conditions["max_value"] = {
-                '$lte': obj.max_value
-            }
-            conditions1['$and'] = [{
-                "min_value": {
-                    '$gte': obj.min_value
+            andCond.push({
+                "max_value": {
+                    '$lte': obj.max_value
                 }
-            }, {
-                    "max_value": {
-                        '$lte': obj.max_value
-                    }
-                }];
+            });
+        }
+
+        if (reqBody.userId !== undefined) {
+            conditions["userId"] = {
+                '$ne': reqBody.userId
+            }
+            andCond.push({ "userId": { $ne: reqBody.userId } });
+        }
+
+        if (reqBody.min_value !== undefined && reqBody.max_value !== undefined) {
+            conditions1['$and'] = andCond;
+
         } else {
             conditions1 = conditions;
+        }
+
+        if (reqBody.take_title !== undefined) {
+            conditions2 = {
+                "$or": [{ title: reqBody.take_title }, { description: reqBody.take_title }, conditions1]
+            }
+        } else {
+            conditions2 = conditions1;
         }
 
         // if (reqBody.lat !== undefined) {
@@ -123,8 +138,8 @@ var itemModule = (function () {
         //     obj['lng'] = reqBody.lng;
         // }
 
-        console.log('conditions.......', JSON.stringify(conditions1));
-        Item.find(conditions1, function (error, result) {
+        console.log('conditions.......', JSON.stringify(conditions2));
+        Item.find(conditions2, function (error, result) {
             console.log(error);
             console.log(result);
             if (!error) {

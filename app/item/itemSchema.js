@@ -14,6 +14,9 @@ var item = (function () {
         category: {
             type: String
         },
+         description: {
+            type: String
+        },
         requester: {
             type: String
         },
