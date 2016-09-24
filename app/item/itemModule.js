@@ -9,6 +9,8 @@ var itemModule = (function () {
 
         if (reqBody.request_type !== undefined) {
             obj['request_type'] = reqBody.request_type;
+        } else {
+            obj['request_type'] = "Give";
         }
         if (reqBody.title !== undefined) {
             obj['title'] = reqBody.title;
@@ -19,9 +21,14 @@ var itemModule = (function () {
         if (reqBody.requester !== undefined) {
             obj['requester'] = reqBody.requester;
         }
-        if (reqBody.item_value !== undefined) {
-            obj['item_value'] = reqBody.item_value;
+        if (reqBody.max_value !== undefined) {
+            obj['max_value'] = reqBody.max_value;
         }
+
+        if (reqBody.min_value !== undefined) {
+            obj['min_value'] = reqBody.min_value;
+        }
+
         if (reqBody.points !== undefined) {
             obj['points'] = reqBody.points;
         }
@@ -40,12 +47,14 @@ var itemModule = (function () {
         }
         if (reqBody.condition !== undefined) {
             obj['condition'] = reqBody.condition;
+        } else {
+            obj['condition'] = "Good";
         }
 
         if (reqBody.user_id !== undefined) {
             obj['user_id'] = reqBody.user_id;
         }
-
+        console.log('JSON-', obj);
         var itemObj = new Item(obj);
 
         itemObj.save(function (error, item) {
