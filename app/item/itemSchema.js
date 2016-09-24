@@ -18,10 +18,10 @@ var item = (function () {
             type: String
         },
         min_value: {
-            type: String
+            type: Number
         },
         max_value: {
-            type: String
+            type: Number
         },
         points: {
             type: String

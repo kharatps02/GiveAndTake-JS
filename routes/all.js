@@ -12,7 +12,7 @@ router.post('/users/signup', userModule.signUp);
 router.post('/users/registerDevice', userModule.registerDevice);
 
 /* prdocut listing. */
-router.get('/items', itemModule.getItems);
+router.post('/items', itemModule.getItems);
 router.post('/item', itemModule.addItem);
 
 router.get('/', function (req, res, next) {

@@ -79,9 +79,52 @@ var itemModule = (function () {
 
     function getItems(req, res) {
         var jsonObj = {};
+        var reqBody = req.body;
 
-        Item.find({
-        }, function (error, result) {
+        var obj = {};
+        var conditions = {};
+        if (reqBody.min_value !== undefined) {
+            obj['min_value'] = reqBody.min_value;
+            conditions["min_value"] = {
+                '$gte': obj.min_value
+            }
+        }
+        if (reqBody.max_value !== undefined) {
+            obj['max_value'] = reqBody.max_value;
+            conditions["max_value"] = {
+                '$lte': obj.max_value
+            }
+        }
+        var conditions1 = {};
+        if (reqBody.min_value !== undefined && reqBody.max_value !== undefined) {
+            conditions["min_value"] = {
+                '$gte': obj.min_value
+            }
+            conditions["max_value"] = {
+                '$lte': obj.max_value
+            }
+            conditions1['$and'] = [{
+                "min_value": {
+                    '$gte': obj.min_value
+                }
+            }, {
+                    "max_value": {
+                        '$lte': obj.max_value
+                    }
+                }];
+        } else {
+            conditions1 = conditions;
+        }
+
+        // if (reqBody.lat !== undefined) {
+        //     obj['lat'] = reqBody.lat;
+        // }
+        // if (reqBody.lng !== undefined) {
+        //     obj['lng'] = reqBody.lng;
+        // }
+
+        console.log('conditions.......', JSON.stringify(conditions1));
+        Item.find(conditions1, function (error, result) {
             console.log(error);
             console.log(result);
             if (!error) {
