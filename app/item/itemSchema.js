@@ -11,6 +11,9 @@ var item = (function () {
         title: {
             type: String
         },
+        take_title: {
+            type: String
+        },        
         category: {
             type: String
         },
