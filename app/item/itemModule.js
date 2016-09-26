@@ -65,7 +65,7 @@ var itemModule = (function () {
                 jsonObj = {
                     status: 'SUCCESS',
                     message: 'Item added Successfully.',
-                    product: item
+                    item: item
                 }
             } else {
                 jsonObj = {

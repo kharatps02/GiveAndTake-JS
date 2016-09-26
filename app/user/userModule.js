@@ -129,7 +129,7 @@ var userModule = (function () {
                     if (!error) {
                         jsonObj = {
                             status: 'SUCCESS',
-                            cafeList: user1
+                            user: user1
                         }
                     } else {
                         jsonObj = {
