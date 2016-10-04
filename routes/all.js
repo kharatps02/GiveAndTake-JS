@@ -14,6 +14,7 @@ router.post('/users/registerDevice', userModule.registerDevice);
 /* prdocut listing. */
 router.post('/items', itemModule.getItems);
 router.post('/item', itemModule.addItem);
+router.post('/mybot', itemModule.getBotResult);
 
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });

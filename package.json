@@ -16,6 +16,7 @@
     "multer": "^1.2.0",
     "node-gcm": "^0.14.4",
     "nodemailer": "^2.6.4",
+    "request": "^2.75.0",
     "s3fs": "^2.5.0",
     "serve-favicon": "~2.3.0"
   }

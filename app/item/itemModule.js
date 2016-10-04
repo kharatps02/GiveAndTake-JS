@@ -1,3 +1,5 @@
+var request = require('request');
+
 var Item = require('./itemSchema').Item
 
 var itemModule = (function () {
@@ -159,9 +161,38 @@ var itemModule = (function () {
             res.send(jsonObj);
         });
     }
+
+    function getBotResult(req, res) {
+
+        var reqBody = req.body;
+       // console.log('In getBotResult ..')
+        var url = "https://barthub-developer-edition.ap2.force.com/services/apexrest/myservice?";
+        //searchKey=carrom&";
+        //minVal=500&maxVal=10000";
+        if (reqBody.min_value !== undefined) {
+            url += "&minVal=" + reqBody.min_value;
+        } else {
+            url += "&minVal=0";
+        }
+        if (reqBody.max_value !== undefined) {
+            url += "&maxVal=" + reqBody.max_value;
+        } else {
+            url += "&maxVal=100000";
+        }
+
+        if (reqBody.searchKey !== undefined) {
+            url += "&searchKey=" + reqBody.searchKey;
+        }
+        console.log(url)
+        request.get(url, function (error, response, body) {
+            console.log('In getBotResult ..', error, body);
+            res.send(body);
+        });
+    }
     return {
         addItem: addItem,
-        getItems: getItems
+        getItems: getItems,
+        getBotResult: getBotResult
     }
 
 })()
